@@ -82,7 +82,7 @@ All chatbot answers rely strictly on a knowledge base of help document sentences
 
 -✋ Fall back with a fixed polite message and support option if retrieval is insufficient or the answer is unverifiable, ensuring a safe user experience.
 
-##▶️ Sample Fallback Behavior
+## ▶️ Sample Fallback Behavior
 -When the system cannot retrieve context above a confidence threshold, it does not guess but returns:
   "Sorry, I cannot answer that from the provided document. Would you like to contact support?"
 
