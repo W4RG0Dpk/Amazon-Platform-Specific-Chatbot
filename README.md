@@ -1,11 +1,12 @@
 🤖 Amazon Platform Chatbot
 “Local RAG-based chatbot for Amazon buyers and sellers powered by embeddings, FAISS vector search, and local LLM inference with Mistral via Ollama.”
 
-![Python](https://img.shields.io/badge)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![FAISS](https://img.shields.io/badge/FAISS-VectorSearch-orange)
+![SentenceTransformers](https://img.shields.io/badge/SentenceTransformer-Embeddings-purple)
+![Ollama](https://img.shields.io/badge/Ollama-Mistral_7B-black)
+![RAG](https://img.shields.io/badge/Architecture-RAG-brightgreen)
 
-![FAISS](https://img.shields.io/badge/FAISS-VectorSearch-orangehttps://img.shields.io/badge/SentenceTransformer-Embeddingshttps://img.shields.io/badge)
-
-![RAG](https://img.shields.io/badge/Architecture-RAG-brightgreenhttps://img.shields.io/badge)
 
 This chatbot delivers context-aware answers to buyer and seller queries on Amazon by combining vector search retrieval with local LLM generation and fallback handling.
 
