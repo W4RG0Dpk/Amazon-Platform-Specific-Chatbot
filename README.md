@@ -1,5 +1,5 @@
-🤖 Amazon Platform Chatbot
-“Local RAG-based chatbot for Amazon buyers and sellers powered by embeddings, FAISS vector search, and local LLM inference with Mistral via Ollama.”
+# 🤖 Amazon Platform Chatbot
+> “Local RAG-based chatbot for Amazon buyers and sellers powered by embeddings, FAISS vector search, and local LLM inference with Mistral via Ollama.”
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![FAISS](https://img.shields.io/badge/FAISS-VectorSearch-orange)
