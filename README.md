@@ -131,18 +131,18 @@ Access the chatbot UI locally at http://127.0.0.1:8000
 
 ## 📂 Folder Structure
 
-  amazon-platform-chatbot/
-  │
-  ├── embeddings.py       # Sentence Transformer embedding cache/load
-  ├── generator.py        # Build prompts and generate answers with Ollama Mistral
-  ├── ingest.py           # Ingest help doc and build FAISS index
-  ├── retrieval.py        # FAISS semantic search logic
-  ├── verifier.py         # Verify answers grounding strictness
-  ├── main.py             # FastAPI app + chat UI code
-  ├── amazon_help_doc.txt # Help document with buyer/seller instructions
-  ├── requirements.txt    # Python dependencies
-  ├──storage/             # FAISS index, embeddings, metadata files after ingestion
-  └──support/feedback,forms    # feedback and support forms from user        
+    amazon-platform-chatbot/
+    │
+    ├── embeddings.py       # Sentence Transformer embedding cache/load
+    ├── generator.py        # Build prompts and generate answers with Ollama Mistral
+    ├── ingest.py           # Ingest help doc and build FAISS index
+    ├── retrieval.py        # FAISS semantic search logic
+    ├── verifier.py         # Verify answers grounding strictness
+    ├── main.py             # FastAPI app + chat UI code
+    ├── amazon_help_doc.txt # Help document with buyer/seller instructions
+    ├── requirements.txt    # Python dependencies
+    ├──storage/             # FAISS index, embeddings, metadata files after ingestion
+    └──support/feedback,forms    # feedback and support forms from user        
   
 ## ⭐ Features Summary
 -💬 Buyer & Seller Support: Stepwise directions starting from Amazon homepage for both user types.
