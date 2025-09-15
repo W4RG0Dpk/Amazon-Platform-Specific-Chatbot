@@ -69,29 +69,29 @@
 | ![Support](https://img.shields.io/badge/Feature-Support-blue)      | Support contact forms triggered on fallback or direct user request      |
 | ![Fallback](https://img.shields.io/badge/Fallback-critical-red) | Safe fallback messages when information is missing or unverifiable     |
 
-
-📚 Explanation of Context
+---
+## 📚 Explanation of Context
 All chatbot answers rely strictly on a knowledge base of help document sentences — about 100 lines of Amazon buyer and seller instructions, navigation tips, and FAQs. Using semantic search, the system retrieves the most relevant lines for each query, providing clear, explicit context for the LLM to answer confidently and professionally, citing source line numbers. This allows the chatbot to avoid hallucinated answers, ensuring trustworthy help.
 
-🚩 Why RAG?
-Retrieval-Augmented Generation (RAG) enables the chatbot to:
+## 🚩 Why RAG?
+-Retrieval-Augmented Generation (RAG) enables the chatbot to:
 
-🔍 Retrieve the most relevant help document snippets for the user’s query, grounding responses in factual content.
+-🔍 Retrieve the most relevant help document snippets for the user’s query, grounding responses in factual content.
 
-🤖 Pass this context plus the user question to a local LLM (Mistral via Ollama) to generate a coherent answer.
+-🤖 Pass this context plus the user question to a local LLM (Mistral via Ollama) to generate a coherent answer.
 
-✋ Fall back with a fixed polite message and support option if retrieval is insufficient or the answer is unverifiable, ensuring a safe user experience.
+-✋ Fall back with a fixed polite message and support option if retrieval is insufficient or the answer is unverifiable, ensuring a safe user experience.
 
-▶️ Sample Fallback Behavior
-When the system cannot retrieve context above a confidence threshold, it does not guess but returns:
-"Sorry, I cannot answer that from the provided document. Would you like to contact support?"
+##▶️ Sample Fallback Behavior
+-When the system cannot retrieve context above a confidence threshold, it does not guess but returns:
+  "Sorry, I cannot answer that from the provided document. Would you like to contact support?"
 
-If the LLM answer fails strict verification for grounding in the retrieved context, the same fallback triggers.
+-If the LLM answer fails strict verification for grounding in the retrieved context, the same fallback triggers.
 
 The web UI automatically shows a support form on fallback to let users submit detailed queries for human assistance.
 
-🚀 Quick Start
-1️⃣ Prerequisites
+## 🚀 Quick Start
+>1️⃣ Prerequisites
 Python 3.8+
 
 Git
@@ -100,65 +100,66 @@ Ollama CLI installed & Mistral 7B model pulled locally
 
 Local MiniLM L6 v2 SentenceTransformer model downloaded
 
-2️⃣ Setup Ollama & Mistral Model
-text
+>2️⃣ Setup Ollama & Mistral Model
 # Install Ollama from https://ollama.com/download  
 # Then pull the Mistral model for local inference:
-ollama pull mistral
-3️⃣ Install Python Dependencies
+  ollama pull mistral
+>3️⃣ Install Python Dependencies
 bash
-git clone https://github.com/yourusername/amazon-platform-chatbot.git
-cd amazon-platform-chatbot
-pip install -r requirements.txt
-4️⃣ Prepare Sentence Transformer Model
+  git clone https://github.com/yourusername/amazon-platform-chatbot.git
+  cd amazon-platform-chatbot
+  pip install -r requirements.txt
+>4️⃣ Prepare Sentence Transformer Model
 Run once to cache MiniLM-L6 locally:
 
 python
-from sentence_transformers import SentenceTransformer
-SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+  from sentence_transformers import SentenceTransformer
+  SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 Alternatively, configure and use your preferred local path in the embeddings.py.
 
-5️⃣ Ingest Help Document to Build Index
+>5️⃣ Ingest Help Document to Build Index
 Place amazon_help_doc.txt in project root and run:
 
 bash
-python ingest.py
+  python ingest.py
 This builds the FAISS index and stores embeddings, metadata for semantic retrieval.
 
-6️⃣ Run the FastAPI Chat Server
+>6️⃣ Run the FastAPI Chat Server
 bash
-uvicorn main:APP --reload
+  python -m uvicorn main:APP --reload
 Access the chatbot UI locally at http://127.0.0.1:8000
 
-📂 Folder Structure
-text
-amazon-platform-chatbot/
-│
-├── embeddings.py       # Sentence Transformer embedding cache/load
-├── generator.py        # Build prompts and generate answers with Ollama Mistral
-├── ingest.py           # Ingest help doc and build FAISS index
-├── retrieval.py        # FAISS semantic search logic
-├── verifier.py         # Verify answers grounding strictness
-├── main.py             # FastAPI app + chat UI code
-├── amazon_help_doc.txt # Help document with buyer/seller instructions
-├── requirements.txt    # Python dependencies
-└── storage/            # FAISS index, embeddings, metadata files after ingestion
-⭐ Features Summary
-💬 Buyer & Seller Support: Stepwise directions starting from Amazon homepage for both user types.
+## 📂 Folder Structure
 
-🔍 Semantic Retrieval: MiniLM embeddings + FAISS for fast similarity search.
+  amazon-platform-chatbot/
+  │
+  ├── embeddings.py       # Sentence Transformer embedding cache/load
+  ├── generator.py        # Build prompts and generate answers with Ollama Mistral
+  ├── ingest.py           # Ingest help doc and build FAISS index
+  ├── retrieval.py        # FAISS semantic search logic
+  ├── verifier.py         # Verify answers grounding strictness
+  ├── main.py             # FastAPI app + chat UI code
+  ├── amazon_help_doc.txt # Help document with buyer/seller instructions
+  ├── requirements.txt    # Python dependencies
+  ├──storage/             # FAISS index, embeddings, metadata files after ingestion
+  └──support/feedback,forms    # feedback and support forms from user        
+  
+## ⭐ Features Summary
+-💬 Buyer & Seller Support: Stepwise directions starting from Amazon homepage for both user types.
 
-🤖 Local LLM Generation: Mistral 7B model running offline via Ollama CLI.
+-🔍 Semantic Retrieval: MiniLM embeddings + FAISS for fast similarity search.
 
-⚠️ Fallback Handling: Polite fixed message + auto support modal for unanswered queries.
+-🤖 Local LLM Generation: Mistral 7B model running offline via Ollama CLI.
 
-✅ Answer Verification: Ensures answers rely ONLY on retrieved help document for trustworthiness.
+-⚠️ Fallback Handling: Polite fixed message + auto support modal for unanswered queries.
 
-📝 User Feedback & Support: In-UI star rating, feedback comments, and detailed support request submission.
+-✅ Answer Verification: Ensures answers rely ONLY on retrieved help document for trustworthiness.
 
-🔄 Dynamic Context Upload: Ability to update help docs and rebuild FAISS index without redeploy.
+-📝 User Feedback & Support: In-UI star rating, feedback comments, and detailed support request submission.
 
-🤝 Need Help or Want to Contribute?
+-🔄 Dynamic Context Upload: Ability to update help docs and rebuild FAISS index without redeploy.
+
+-🤝 Need Help or Want to Contribute?
 Ollama Official Site
 
 Sentence-Transformers Documentation
