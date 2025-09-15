@@ -67,7 +67,7 @@
 | ![FastAPI](https://img.shields.io/badge/FastAPI-Backend-lightblue) | FastAPI backend serving the chatbot REST APIs and hosting the UI        |
 | ![Feedback](https://img.shields.io/badge/Feature-Feedback-yellowgreen) | User feedback system capturing star ratings and comments                |
 | ![Support](https://img.shields.io/badge/Feature-Support-blue)      | Support contact forms triggered on fallback or direct user request      |
-| ![Fallback](https://img.shields.io/badge/Feature-Fallback-critical-red) | Safe fallback messages when information is missing or unverifiable     |
+| ![Fallback](https://img.shields.io/badge/Fallback-critical-red) | Safe fallback messages when information is missing or unverifiable     |
 
 
 📚 Explanation of Context
