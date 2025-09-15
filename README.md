@@ -8,7 +8,7 @@
 ![RAG](https://img.shields.io/badge/Architecture-RAG-brightgreen)
 ---
 
-# This chatbot delivers context-aware answers to buyer and seller queries on Amazon by combining vector search retrieval with local LLM generation and fallback handling.
+#### This chatbot delivers context-aware answers to buyer and seller queries on Amazon by combining vector search retrieval with local LLM generation and fallback handling.
 
 # workflow:
 
