@@ -6,54 +6,57 @@
 ![SentenceTransformers](https://img.shields.io/badge/SentenceTransformer-Embeddings-purple)
 ![Ollama](https://img.shields.io/badge/Ollama-Mistral_7B-black)
 ![RAG](https://img.shields.io/badge/Architecture-RAG-brightgreen)
+---
 
+# This chatbot delivers context-aware answers to buyer and seller queries on Amazon by combining vector search retrieval with local LLM generation and fallback handling.
 
-This chatbot delivers context-aware answers to buyer and seller queries on Amazon by combining vector search retrieval with local LLM generation and fallback handling.
+# workflow:
 
-text
-              ┌────────────────────────────┐
-              │      User Query Input       │
-              └─────────────┬──────────────┘
-                            │
-                            ▼
-          ╔══════════════════════════╗
-          ║  SentenceTransformer     ║ ← User query semantically embedded locally
-          ║  (MiniLM L6 v2 Model)    ║
-          ╚══════════════════════════╝
-                            │
-                            ▼
-          ╔══════════════════════════╗
-          ║     FAISS Vector Index   ║ ← Retrieves top-N relevant help doc sentences
-          ╚══════════════════════════╝
-                            │
-                            ▼
-          ╔══════════════════════════╗
-          ║   Contextual Prompt Gen  ║ ← Builds prompt from retrieved sentences +
-          ║     + User Query         ║   fallback instructions if no retrieval
-          ╚══════════════════════════╝
-                            │
-                            ▼
-          ╔══════════════════════════╗
-          ║    Local LLM (Mistral)   ║ ← Generates a professional, stepwise answer
-          ║       via Ollama          ║   strictly relying on provided context
-          ╚══════════════════════════╝
-                            │
-                            ▼
-          ╔══════════════════════════╗
-          ║   Verification via LLM   ║ ← Checks if answer is grounded in context 
-          ╚══════════════════════════╝
-                            │
-                            ▼
-              ┌─────────────┴─────────────┐
-              │                           │
-        Answer verified               Answer NOT verified  
-      (returns AI response)      (returns fallback and triggers support modal)
-              │                           │
-              ▼                           ▼
-       ┌─────────────┐            ┌───────────────┐
-       │  Frontend UI│            │ Support &      │
-       │  Chat Panel │            │ Feedback Forms │
-       └─────────────┘            └───────────────┘
+                ┌────────────────────────────┐
+                │      User Query Input       │
+                └─────────────┬──────────────┘
+                              │
+                              ▼
+            ╔══════════════════════════╗
+            ║  SentenceTransformer     ║ ← User query semantically embedded locally
+            ║  (MiniLM L6 v2 Model)    ║
+            ╚══════════════════════════╝
+                              │
+                              ▼
+            ╔══════════════════════════╗
+            ║     FAISS Vector Index   ║ ← Retrieves top-N relevant help doc sentences
+            ╚══════════════════════════╝
+                              │
+                              ▼
+            ╔══════════════════════════╗
+            ║   Contextual Prompt Gen  ║ ← Builds prompt from retrieved sentences +
+            ║     + User Query         ║   fallback instructions if no retrieval
+            ╚══════════════════════════╝
+                              │
+                              ▼
+            ╔══════════════════════════╗
+            ║    Local LLM (Mistral)   ║ ← Generates a professional, stepwise answer
+            ║       via Ollama          ║   strictly relying on provided context
+            ╚══════════════════════════╝
+                              │
+                              ▼
+            ╔══════════════════════════╗
+            ║   Verification via LLM   ║ ← Checks if answer is grounded in context 
+            ╚══════════════════════════╝
+                              │
+                              ▼
+                ┌─────────────┴─────────────┐
+                │                           │
+          Answer verified               Answer NOT verified  
+        (returns AI response)      (returns fallback and triggers support modal)
+                │                           │
+                ▼                           ▼
+         ┌─────────────┐            ┌───────────────┐
+         │  Frontend UI│            │ Support &      │
+         │  Chat Panel │            │ Feedback Forms │
+         └─────────────┘            └───────────────┘
+  ****
+  ---
 🛠️ Core Features
 🔧 Feature	📖 Description
 RAG Architecture	Retrieval-Augmented Generation combining local semantic search with local LLM answer generation
