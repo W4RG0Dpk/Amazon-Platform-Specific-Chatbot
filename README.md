@@ -55,18 +55,19 @@
          │  Frontend UI│            │ Support &      │
          │  Chat Panel │            │ Feedback Forms │
          └─────────────┘            └───────────────┘
-  ****
-  ---
-🛠️ Core Features
-🔧 Feature	📖 Description
-RAG Architecture	Retrieval-Augmented Generation combining local semantic search with local LLM answer generation
-Semantic Search	Sentence embeddings with MiniLM L6 + FAISS vector DB for efficient nearest neighbor search
-Local LLM Inference	Runs Mistral 7B locally via Ollama CLI for zero-API-cost generation
-Fallback Handling	Strict fallback message if no relevant context or answer fails verification, prompting contact support
-Answer Verification	Uses LLM to verify answer is strictly based on retrieved context, rejecting hallucinations
-Web UI Chat Interface	Responsive chat with buyer & seller context, feedback rating, and support request modals
-Context Management	Upload and ingestion pipeline for refreshing help doc embeddings and FAISS index
-Support & Feedback	User feedback collection and support requests stored as local files for team follow-up
+****
+---
+## 📦 Core Technologies & Components
+|🔧 Component | 💬	Description
+|![SentenceTransformers](https://img.shields.io/badge/SentenceTransformer-EmbeddingsLM_L6_v2) | sentence transformer locally embedded help doc and queries	
+|![FAISS](https://img.shields.io/badge/FAISS-VectorSearch-orange) |	FAISS index for efficient vector similarity search
+|![Ollama](https://img.shields.io/badge	Mistral 7B) | model loaded locally, accessed via Ollama CLI
+|![RAG](https://img.shields.io/badge/Architecture-RAG-brightgreen) |	Retrieval-Augmented Generation approach combining search & LLM
+|![FastAPI](https://img.shields.io/badge/FasAPI)	FastAPI backend hosting the chatbot APIs and UI
+|![Feedback](https://img.shields.io/badge/Feature-Feedback-yellowgreen) | feedback star rating and comment collection	
+|![Support](https://img.shields.io/badge/support)	| Support contact forms triggered on fallback or by user
+|![Fallback](https://img.shields.io/badge/Feature-Fallback-critical) | Safe fallback message when information is insufficient	
+
 📚 Explanation of Context
 All chatbot answers rely strictly on a knowledge base of help document sentences — about 100 lines of Amazon buyer and seller instructions, navigation tips, and FAQs. Using semantic search, the system retrieves the most relevant lines for each query, providing clear, explicit context for the LLM to answer confidently and professionally, citing source line numbers. This allows the chatbot to avoid hallucinated answers, ensuring trustworthy help.
 
